@@ -1,6 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Box } from 'utils/Box';
+
+import {
+  StyledMovieCard,
+  Rating,
+  ContentWrapper,
+  ImageWrapper,
+  StyledImage,
+} from './MoviesList.styled';
 
 export const MoviesList = ({ movies }) => {
   const location = useLocation();
@@ -8,17 +16,30 @@ export const MoviesList = ({ movies }) => {
   return (
     <>
       <Box
-        display="grid"
-        gridGap="2"
-        gridTemplateColumns="repeat(auto-fill, minmax(320px, 1fr))"
         as="ul"
+        display="grid"
+        gridTemplateColumns="repeat(5, 1fr)"
+        gridGap="20px"
+        gridAutoRows="auto"
       >
-        {movies.map(({ id, title, poster }) => (
+        {movies.map(({ id, title, poster, vote_average }) => (
           <li key={id}>
-            <Link to={`/movies/${id}`} state={{ from: location }}>
-              <img src={poster} alt={title} width="100" />
-              <p>{title}</p>
-            </Link>
+            <StyledMovieCard to={`/movies/${id}`} state={{ from: location }}>
+              <ImageWrapper>
+                <StyledImage src={poster} alt={title} />
+              </ImageWrapper>
+              <ContentWrapper>
+                <p>
+                  <b>{title}</b>
+                </p>
+                <p>
+                  <b>Rating: </b>
+                  <Rating rating={vote_average.toFixed(2)}>
+                    {vote_average.toFixed(2)}
+                  </Rating>
+                </p>
+              </ContentWrapper>
+            </StyledMovieCard>
           </li>
         ))}
       </Box>

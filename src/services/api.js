@@ -17,7 +17,7 @@ export const getFetchSearchMovies = async query => {
   const response = await axios('/search/movie', {
     params: {
       api_key: KEY,
-      include_adult: true,
+      include_adult: false,
       query,
     },
   });
