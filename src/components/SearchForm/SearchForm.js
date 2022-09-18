@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {
   StyledSearchForm,
   SearchFormButton,
@@ -62,4 +63,8 @@ export const SearchForm = ({ setSearchMovies }) => {
       </StyledSearchForm>
     </Box>
   );
+};
+
+SearchForm.propTypes = {
+  setSearchMovies: PropTypes.func.isRequired,
 };
